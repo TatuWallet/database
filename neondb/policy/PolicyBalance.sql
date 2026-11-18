@@ -1,8 +1,6 @@
 -- Somente leitura, apenas dos saldos das carteiras do usuário.
 ALTER TABLE public.saldo ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS saldo_select ON public.saldo;
-
 CREATE POLICY saldo_select ON public.saldo
   FOR SELECT TO authenticated
   USING (EXISTS (

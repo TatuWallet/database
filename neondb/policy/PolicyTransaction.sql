@@ -2,8 +2,6 @@
 -- Escrita não é liberada: transações são criadas pelo backend.
 ALTER TABLE public.transacao ENABLE ROW LEVEL SECURITY;
 
-DROP POLICY IF EXISTS transacao_select ON public.transacao;
-
 CREATE POLICY transacao_select ON public.transacao
   FOR SELECT TO authenticated
   USING (EXISTS (
