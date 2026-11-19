@@ -1,5 +1,6 @@
 -- Lê a transação se a carteira de origem ou de destino for do usuário.
 -- Escrita não é liberada: transações são criadas pelo backend.
+-- ANY (qualquer maior que um)
 ALTER TABLE public.transacao ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY transacao_select ON public.transacao

@@ -56,7 +56,7 @@ CREATE TABLE public.carteira (
 -- transacao
 -- ---------------------------------------------------------------------
 CREATE TABLE public.transacao (
-    id                   integer      GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id                   bigint      GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     tipo                 public.tipo_transacao_enum NOT NULL,
     valor_unitario       numeric      NOT NULL,
     id_cripto            bigint       NOT NULL REFERENCES public.criptomoeda(id),
