@@ -8,7 +8,6 @@
 -- Enums
 -- ---------------------------------------------------------------------
 CREATE TYPE public.tipo_transacao_enum      AS ENUM ('compra', 'venda', 'transferencia');
-CREATE TYPE public.tipo_movimentacao_enum   AS ENUM ('deposito', 'saque');
 CREATE TYPE public.status_movimentacao_enum AS ENUM ('pendente', 'concluido', 'cancelado');
 
 -- ---------------------------------------------------------------------
@@ -42,26 +41,28 @@ CREATE TABLE public.criptomoeda (
 -- carteira
 -- ---------------------------------------------------------------------
 CREATE TABLE public.carteira (
-    id            integer       GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id            bigint        GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome          varchar(100)  NOT NULL,
     saldo_fiat    numeric(20,2) NOT NULL DEFAULT 1000.00 CHECK (saldo_fiat >= 0),
     id_usuario    uuid          NOT NULL REFERENCES public.usuario(id) ON DELETE RESTRICT,
-    endereco      varchar(42)   NOT NULL UNIQUE,
+    endereco      varchar(128)  NOT NULL UNIQUE,
     data_criacao  timestamptz   NOT NULL DEFAULT now(),
     tipo          varchar(20)   NOT NULL DEFAULT 'SELF_CUSTODY'
-                  CHECK (tipo IN ('SELF_CUSTODY', 'IMPORTADA', 'WATCH_ONLY'))
+                  CHECK (tipo IN ('SELF_CUSTODY', 'IMPORTADA', 'WATCH_ONLY')),
+    verified      boolean       NOT NULL DEFAULT false,
+    rede          varchar(20)   NOT NULL
 );
 
 -- ---------------------------------------------------------------------
 -- transacao
 -- ---------------------------------------------------------------------
 CREATE TABLE public.transacao (
-    id                   bigint      GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id                   bigint       GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     tipo                 public.tipo_transacao_enum NOT NULL,
     valor_unitario       numeric      NOT NULL,
     id_cripto            bigint       NOT NULL REFERENCES public.criptomoeda(id),
-    id_carteira_origem   integer      NOT NULL REFERENCES public.carteira(id),
-    id_carteira_destino  integer      REFERENCES public.carteira(id),
+    id_carteira_origem   bigint       NOT NULL REFERENCES public.carteira(id),
+    id_carteira_destino  bigint       REFERENCES public.carteira(id),
     hash                 varchar(66)  UNIQUE,               -- NULL até ser enviada
     valor_wei            numeric(78,0) NOT NULL CHECK (valor_wei >= 0),
     nonce                bigint       CHECK (nonce IS NULL OR nonce >= 0),
@@ -85,7 +86,7 @@ CREATE INDEX idx_transacao_status  ON public.transacao (status);
 -- ---------------------------------------------------------------------
 CREATE TABLE public.saldo (
     id              bigint        GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    id_carteira     integer       NOT NULL REFERENCES public.carteira(id),
+    id_carteira     bigint        NOT NULL REFERENCES public.carteira(id),
     id_cripto       bigint        NOT NULL REFERENCES public.criptomoeda(id),
     quantidade_wei  numeric(78,0) NOT NULL DEFAULT 0 CHECK (quantidade_wei >= 0),
     atualizado_em   timestamptz   NOT NULL DEFAULT now(),
@@ -107,20 +108,20 @@ CREATE TABLE public.preco_historico (
 );
 
 -- ---------------------------------------------------------------------
--- movimentacao_fiat (depósito/saque em reais numa carteira)
+-- movimentacao_fiat (lado em reais de uma compra ou venda de cripto)
 -- ---------------------------------------------------------------------
 CREATE TABLE public.movimentacao_fiat (
-    id             integer       GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    id_carteira    integer       NOT NULL REFERENCES public.carteira(id),
-    tipo           public.tipo_movimentacao_enum NOT NULL,
-    valor_fiat     numeric(20,2) NOT NULL CHECK (valor_fiat > 0),
-    status         public.status_movimentacao_enum NOT NULL DEFAULT 'pendente',
-    metodo         varchar(100)  NOT NULL,
-    data           timestamptz   NOT NULL DEFAULT now(),
-    moeda_fiat     char(3)       NOT NULL DEFAULT 'BRL',
-    id_transacao   integer       REFERENCES public.transacao(id),
-    cotacao_usada  numeric(20,8) CHECK (cotacao_usada IS NULL OR cotacao_usada > 0),
-    -- ou tem transação e cotação, ou não tem nenhuma das duas
+    id              bigint        GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_carteira     bigint        NOT NULL REFERENCES public.carteira(id),
+    tipo            varchar(10)   NOT NULL CHECK (tipo IN ('COMPRA', 'VENDA')),
+    valor_fiat      numeric(20,2) NOT NULL CHECK (valor_fiat > 0),
+    status          public.status_movimentacao_enum NOT NULL DEFAULT 'pendente',
+    metodo          varchar(100)  NOT NULL,
+    data            timestamptz   NOT NULL DEFAULT now(),
+    moeda_fiat      char(3)       NOT NULL DEFAULT 'BRL',
+    id_transacao    bigint        NOT NULL REFERENCES public.transacao(id),
+    cotacao_usada   numeric(20,8) NOT NULL CHECK (cotacao_usada > 0),
+    quantidade_wei  bigint        NOT NULL,
     CONSTRAINT movimentacao_fiat_conversao_check
         CHECK ((id_transacao IS NULL) = (cotacao_usada IS NULL))
 );

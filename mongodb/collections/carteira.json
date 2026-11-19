@@ -1,0 +1,11 @@
+{
+  "id_usuario": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "nome": "Carteira Principal",
+  "endereco": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+  "rede": "ANVIL",
+  "tipo": "SELF_CUSTODY",
+  "verified": false,
+  "saldo_fiat": { "$numberDecimal": "1000.00" },
+  "data_criacao": { "$date": "2026-08-22T18:20:00Z" },
+  "saldos": []
+}
