@@ -1,11 +1,86 @@
-{
-  "id_usuario": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  "nome": "Carteira Principal",
-  "endereco": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-  "rede": "ANVIL",
-  "tipo": "SELF_CUSTODY",
-  "verified": false,
-  "saldo_fiat": { "$numberDecimal": "1000.00" },
-  "data_criacao": { "$date": "2026-08-22T18:20:00Z" },
-  "saldos": []
-}
+[
+  {
+    "_id": {
+      "$oid": "6aa08e347875d3c1f8e6ed01"
+    },
+    "id_usuario": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "nome": "Carteira Principal",
+    "endereco": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+    "rede": "ANVIL",
+    "tipo": "SELF_CUSTODY",
+    "verified": false,
+    "saldo_fiat": {
+      "$numberDecimal": "1000.00"
+    },
+    "data_criacao": {
+      "$date": "2026-08-22T18:20:00Z"
+    },
+    "saldos": [
+      {
+        "id_cripto": "ETH",
+        "quantidade_wei": {
+          "$numberDecimal": "299979000000000000"
+        },
+        "atualizado_em": {
+          "$date": "2026-08-22T21:00:02Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6aa08e347875d3c1f8e6ed02"
+    },
+    "id_usuario": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "nome": "Carteira Principal",
+    "endereco": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+    "rede": "ANVIL",
+    "tipo": "SELF_CUSTODY",
+    "verified": false,
+    "saldo_fiat": {
+      "$numberDecimal": "1000.00"
+    },
+    "data_criacao": {
+      "$date": "2026-08-22T18:20:00Z"
+    },
+    "saldos": [
+      {
+        "id_cripto": "ETH",
+        "quantidade_wei": {
+          "$numberDecimal": "200000000000000000"
+        },
+        "atualizado_em": {
+          "$date": "2026-08-22T21:00:02Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6aa08e347875d3c1f8e6ed03"
+    },
+    "id_usuario": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+    "nome": "Tesouraria",
+    "endereco": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+    "rede": "ANVIL",
+    "tipo": "SELF_CUSTODY",
+    "verified": false,
+    "saldo_fiat": {
+      "$numberDecimal": "1000.00"
+    },
+    "data_criacao": {
+      "$date": "2026-08-22T18:20:00Z"
+    },
+    "saldos": [
+      {
+        "id_cripto": "ETH",
+        "quantidade_wei": {
+          "$numberDecimal": "9999499979000000000000"
+        },
+        "atualizado_em": {
+          "$date": "2026-08-22T19:00:03Z"
+        }
+      }
+    ]
+  }
+]

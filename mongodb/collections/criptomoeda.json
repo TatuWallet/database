@@ -1,12 +1,11 @@
 [
-{
-  "_id": "bitcoin",
-  "nome": "Bitcoin",
-  "anotacoes": "Primeira criptomoeda, referência de mercado"
-},
-{
-  "_id": "ethereum",
-  "nome": "Ethereum",
-  "anotacoes": "Segunda maior criptomoeda por valor de mercado"
-}
+  {
+    "_id": "ETH",
+    "nome": "Ethereum",
+    "simbolo": "ETH",
+    "decimais": 18,
+    "endereco_contrato": null,
+    "ativa": true,
+    "anotacoes": "Moeda nativa da rede"
+  }
 ]

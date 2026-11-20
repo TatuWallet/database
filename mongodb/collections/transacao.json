@@ -1,25 +1,76 @@
 [
-{
-  "_id": {
-    "$oid": "6a9f5b6786e43c98f39727e2"
+  {
+    "_id": {
+      "$oid": "6aa08e487875d3c1f8e6ed2d"
+    },
+    "id_usuario": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "id_carteira_origem": {
+      "$oid": "6aa08e347875d3c1f8e6ed03"
+    },
+    "id_carteira_destino": {
+      "$oid": "6aa08e347875d3c1f8e6ed01"
+    },
+    "tipo": "compra",
+    "id_cripto": "ETH",
+    "valor_wei": {
+      "$numberDecimal": "500000000000000000"
+    },
+    "valor_unitario": {
+      "$numberDecimal": "15000.00"
+    },
+    "status": "MINERADA",
+    "hash": "0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "nonce": 0,
+    "gas": {
+      "price_wei": {
+        "$numberDecimal": "1000000000"
+      },
+      "limit": 21000,
+      "usado": 21000
+    },
+    "block_number": 1,
+    "erro": null,
+    "criada_em": {
+      "$date": "2026-08-22T19:00:00Z"
+    },
+    "minerada_em": {
+      "$date": "2026-08-22T19:00:03Z"
+    }
   },
-  "id_usuario": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  "id_carteira_origem": "c1a2r3t4-...",
-  "id_carteira_destino": "c1a2r3t4-...",
-  "tipo": "compra",
-  "quantidade": 0.001,
-  "valor_unitario": 65000,
-  "id_cripto": "bitcoin",
-  "data": "2026-08-22T19:00:00Z"
-},
-{
-  "id_usuario": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  "id_carteira_origem": "c1a2r3t4-1111-2222-3333-444455556666",
-  "id_carteira_destino": "c1a2r3t4-7777-8888-9999-000011112222",
-  "tipo": "transferencia",
-  "id_cripto": "ethereum",
-  "quantidade": 0.5,
-  "valor_unitario": null,
-  "data": "2026-08-22T21:00:00Z"
-}
+  {
+    "_id": {
+      "$oid": "6aa08e487875d3c1f8e6ed2e"
+    },
+    "id_usuario": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "id_carteira_origem": {
+      "$oid": "6aa08e347875d3c1f8e6ed01"
+    },
+    "id_carteira_destino": {
+      "$oid": "6aa08e347875d3c1f8e6ed02"
+    },
+    "tipo": "transferencia",
+    "id_cripto": "ETH",
+    "valor_wei": {
+      "$numberDecimal": "200000000000000000"
+    },
+    "valor_unitario": null,
+    "status": "MINERADA",
+    "hash": "0xabababababababababababababababababababababababababababababababab",
+    "nonce": 0,
+    "gas": {
+      "price_wei": {
+        "$numberDecimal": "1000000000"
+      },
+      "limit": 21000,
+      "usado": 21000
+    },
+    "block_number": 2,
+    "erro": null,
+    "criada_em": {
+      "$date": "2026-08-22T21:00:00Z"
+    },
+    "minerada_em": {
+      "$date": "2026-08-22T21:00:02Z"
+    }
+  }
 ]
