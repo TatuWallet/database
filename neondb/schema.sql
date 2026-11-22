@@ -1,5 +1,5 @@
 -- =====================================================================
--- CriptoFinance: schema (public)
+-- TatuWallet: schema (public)
 -- Gerado a partir do pg_dump do Neon (PostgreSQL 18).
 -- Não inclui RLS, policies nem grants: ver bd/policy.
 -- =====================================================================
